@@ -7,6 +7,8 @@ export const POST = testConnect(async (req) => {
     const body = await req.json();
     const user = await User.findOne({ email: body.email });
 
+
+
     if (user) {
         const bytes = CryptoJS.AES.decrypt(user.password, process.env.PASSWORD_SECRET_);
         const userPassword = bytes.toString(CryptoJS.enc.Utf8);
@@ -16,9 +18,11 @@ export const POST = testConnect(async (req) => {
                 { success: true, email: body.email, name: user.name },
                 process.env.JWT_SECRET_,
                 { expiresIn: '1d' }
+                
             );
 
             return new Response(JSON.stringify({ success: true, token }), {
+                
                 status: 200,
                 headers: { "Content-Type": "application/json" },
             });

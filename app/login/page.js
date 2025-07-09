@@ -12,7 +12,9 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+
     const token = localStorage.getItem("token");
+    console.log()
     if (token) {
       localStorage.removeItem("token");
     }

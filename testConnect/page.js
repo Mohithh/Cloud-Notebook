@@ -10,7 +10,7 @@ const connectDB = (handler) => async (req, res) => {
 
   try {
     console.log("🌐 Trying to connect with URI:", process.env.MONGODB_URI);  // 🛠️ Debug log
-    await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/my_All_data");
+    await mongoose.connect("mongodb+srv://mohit:mohityadav6392%40@cluster0.w9emksp.mongodb.net/my_All_data?retryWrites=true&w=majority&appName=Cluster0" || "mongodb://localhost:27017/my_All_data");
     console.log("✅ Connected to MongoDB");
   } catch (error) {
     console.error("❌ MongoDB connection error:", error);
