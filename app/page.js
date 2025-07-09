@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const InfoPage = () => {
+const HomePage = () => {  // Changed from InfoPage to HomePage
   const router = useRouter();
 
   const features = [
@@ -124,4 +124,4 @@ const InfoPage = () => {
   );
 };
 
-export default InfoPage;
+export default HomePage;  // Changed from InfoPage to HomePage
