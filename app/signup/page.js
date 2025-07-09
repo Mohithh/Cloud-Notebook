@@ -192,7 +192,7 @@ export default function SignUpPage() {
 
       {/* Message */}
       {message && <p className="text-sm text-red-500 font-medium">{message}</p>}
-      {cotp && <p className="text-xs text-gray-400">OTP sent: {cotp}</p>}
+      {/* {cotp && <p className="text-xs text-gray-400">OTP sent: {cotp}</p>} */}
 
       {/* OTP Box */}
       {otpbox && (
