@@ -42,7 +42,7 @@ export default function LoginPage() {
           transition: Bounce,
         });
 
-        setTimeout(() => router.push("/home"), 1000);
+        setTimeout(() => router.push("/imagecloud"), 1000);
       } else {
         toast.error(res.error || "Login failed", {
           position: "top-center",
