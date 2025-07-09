@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
@@ -57,7 +57,8 @@ const Page = () => {
     }
   };
 
-  const refresh = async () => {
+  const refresh = useCallback(async () => {
+    if (!useremail) return;
     const res = await fetch("/api/fetchtextcloud", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -65,7 +66,7 @@ const Page = () => {
     });
     const data = await res.json();
     if (res.ok) setAlldata(data.data);
-  };
+  }, [useremail]);
 
   const submitform = async (e) => {
     e.preventDefault();
@@ -125,7 +126,7 @@ const Page = () => {
       }
     };
     checkuser();
-  }, []);
+  }, [router]); // Added router to dependency array
 
   return (
     <div className="min-h-screen bg-white text-gray-800">

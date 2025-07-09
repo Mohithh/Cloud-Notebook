@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { toast, Bounce, ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function ImagePage() {
@@ -38,7 +39,7 @@ export default function ImagePage() {
     };
 
     checkuser();
-  }, []);
+  }, [router]); // Added router to dependency array
 
   const fetchUploads = async (email) => {
     try {
@@ -125,7 +126,6 @@ export default function ImagePage() {
           </div>
 
           <div className="flex items-center space-x-4">
-            
             <div className="text-sm text-gray-600 hidden md:block">
               Welcome, <span className="font-medium">{useremail}</span>
             </div>
@@ -222,7 +222,14 @@ export default function ImagePage() {
                   <div className="flex items-start space-x-3">
                     <div className="flex-shrink-0">
                       {file.contentType.startsWith("image/") ? (
-                        <img className="h-12 w-12 rounded-md object-cover" src={file.base64} alt={file.originalName} />
+                        <div className="h-12 w-12 relative rounded-md overflow-hidden">
+                          <Image 
+                            src={file.base64} 
+                            alt={file.originalName}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
                       ) : file.contentType === "application/pdf" ? (
                         <div className="h-12 w-12 bg-red-100 rounded-md flex items-center justify-center">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -284,9 +291,16 @@ export default function ImagePage() {
                     <tr key={file.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
-                          <div className="flex-shrink-0 h-10 w-10">
+                          <div className="flex-shrink-0 h-10 w-10 relative">
                             {file.contentType.startsWith("image/") ? (
-                              <img className="h-10 w-10 rounded-md object-cover" src={file.base64} alt={file.originalName} />
+                              <div className="h-10 w-10 relative rounded-md overflow-hidden">
+                                <Image 
+                                  src={file.base64} 
+                                  alt={file.originalName}
+                                  fill
+                                  className="object-cover"
+                                />
+                              </div>
                             ) : file.contentType === "application/pdf" ? (
                               <div className="h-10 w-10 bg-red-100 rounded-md flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -337,3 +351,4 @@ export default function ImagePage() {
     </div>
   );
 }
+ 
