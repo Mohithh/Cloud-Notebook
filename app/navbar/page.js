@@ -3,20 +3,23 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
-const NavBar = () => {
+const NavBar = ({ onLogout }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [hasToken, setHasToken] = useState(false);
 
+  // Check for token on initial render and when pathname changes
   useEffect(() => {
     const token = localStorage.getItem("token");
     setHasToken(!!token);
-  }, []);
+  }, [pathname]); // Add pathname as dependency to check on route changes
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setHasToken(false);
+    if (onLogout) onLogout(); // Notify parent component if needed
     router.push("/login");
+    router.refresh(); // Refresh the route to ensure all components update
   };
 
   const navItems = [
@@ -74,6 +77,6 @@ const NavBar = () => {
       </div>
     </div>
   );
-};
+}; 
 
 export default NavBar;
