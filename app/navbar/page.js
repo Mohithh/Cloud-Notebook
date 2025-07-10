@@ -57,7 +57,7 @@ const NavBar = ({ onLogout }) => {
             >
               <span className="text-2xl">🚪</span>
               <span className="text-xs mt-1 font-medium hidden sm:block">Logout</span>
-              <span className="text-xs mt-1 font-medium sm:hidden">Exit</span>
+              <span className="text-xs mt-1 font-medium sm:hidden">Log Out</span>
             </button>
           ) : (
             <button
