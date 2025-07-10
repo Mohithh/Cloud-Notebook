@@ -20,7 +20,7 @@ export async function POST(request) {
     });
 
     await transporter.sendMail({
-      from: `Settlesmart_solution <${process.env.GMAIL_USER}>`,
+      from: `Cloud Nodebook <${process.env.GMAIL_USER}>`,
       to: email,
       subject:subject,
       text,

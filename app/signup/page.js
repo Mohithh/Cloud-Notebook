@@ -85,11 +85,11 @@ export default function SignUpPage() {
 
     const sendingmail = async (e) => { 
 
-       e.preventDefault();
+       e.preventDefault(); 
     setMessage("Sending...");
 
     const otp = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP 
-    const text = `Your OTP is ${otp}. It is valid for 5 minutesssss.`; // use inline here
+const text = `🔐 Your verification code is: ${otp}\nThis OTP is valid for 10 minutes.\n\n— Sent by Mohit Yadav | Cloud Notebook Team`;
     setcotp(otp)
     const subject = "verification Mail";
 
