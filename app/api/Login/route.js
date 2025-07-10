@@ -16,7 +16,7 @@ export const POST = testConnect(async (req) => {
         if (body.password === userPassword) {
             const token = jwt.sign(
                 { success: true, email: body.email, name: user.name },
-                process.env.JWT_SECRET_,
+                process.env.JWT_SECRET_, 
                 { expiresIn: '1d' }
                 
             );

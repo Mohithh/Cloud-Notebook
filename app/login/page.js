@@ -14,9 +14,9 @@ export default function LoginPage() {
   useEffect(() => {
 
     const token = localStorage.getItem("token");
-    console.log()
+    // console.log()
     if (token) {
-      localStorage.removeItem("token");
+      router.push("/imagecloud");
     }
   }, []);
 

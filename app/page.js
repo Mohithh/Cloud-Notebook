@@ -1,12 +1,23 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const HomePage = () => {  // Changed from InfoPage to HomePage
   const router = useRouter();
+
+  useEffect(() => {
+    
+    const token = localStorage.getItem("token");
+    // console.log()
+    if (token) {
+      router.push("/imagecloud");
+    }  
+
+  }, [])
+  
 
   const features = [
     { icon: '🔐', title: 'Secure Login', description: 'Create your account with OTP verification for secure access to your personal cloud storage.' },
