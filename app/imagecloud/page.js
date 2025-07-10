@@ -9,39 +9,55 @@ export default function ImagePage() {
   const router = useRouter();
   const [useremail, setUseremail] = useState("");
   const [file, setFile] = useState(null);
-  const [uploads, setUploads] = useState([]);
+  const [uploads, setUploads] = useState([]); 
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const checkuser = async () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        try {
-          const res = await fetch("/api/useremail", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", token },
-          });
-          const data = await res.json();
+  const checkAuth = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+      return false;
+    }
 
-          if (data.success) {
-            setUseremail(data.email);
-            await fetchUploads(data.email);
-          } else {
-            toast.error("🔒 Please login again", { transition: Bounce });
-            router.push("/login"); 
-          }
-        } catch (err) {
-          toast.error("⚠️ Error fetching user", { transition: Bounce });
-        }
-      } else {
-                    localStorage.removeItem("token");
-        toast.error("🔒 Please login first", { transition: Bounce });
+    try {
+      const res = await fetch("/api/useremail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", token },
+      });
+      const data = await res.json();
+
+      if (!data.success) {
+        localStorage.removeItem("token");
+        toast.error("🔒 Session expired, please login again", { transition: Bounce });
         router.push("/login");
+        return false;
       }
+      return data;
+    } catch (err) {
+      toast.error("⚠️ Error verifying session", { transition: Bounce });
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    const initialize = async () => {
+      const authData = await checkAuth();
+      if (!authData) return;
+
+      setUseremail(authData.email);
+      await fetchUploads(authData.email);
+      setLoading(false);
     };
 
-    checkuser();
-  }, [router]); // Added router to dependency array
+    initialize();
+
+    // Set up periodic auth check (every 4 minutes)
+    const interval = setInterval(async () => {
+      await checkAuth();
+    }, 240000); // 4 minutes
+
+    return () => clearInterval(interval);
+  }, [router]);
 
   const fetchUploads = async (email) => {
     try {
@@ -52,8 +68,6 @@ export default function ImagePage() {
       }
     } catch (err) {
       toast.error("⚠️ Error loading files", { transition: Bounce });
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -63,6 +77,10 @@ export default function ImagePage() {
       toast.error("Please select a file first");
       return;
     }
+
+    // Check auth before upload
+    const authData = await checkAuth();
+    if (!authData) return;
 
     const formData = new FormData();
     formData.append("email", useremail);
@@ -90,6 +108,10 @@ export default function ImagePage() {
   const handleDelete = async (id) => {
     const confirm = window.confirm("Are you sure you want to delete this file?");
     if (!confirm) return;
+
+    // Check auth before delete
+    const authData = await checkAuth();
+    if (!authData) return;
 
     try {
       const res = await fetch("/api/deleteimage", {
