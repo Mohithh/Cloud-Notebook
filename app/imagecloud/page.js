@@ -27,14 +27,15 @@ export default function ImagePage() {
             setUseremail(data.email);
             await fetchUploads(data.email);
           } else {
-            localStorage.removeItem("token");
             toast.error("🔒 Please login again", { transition: Bounce });
-            router.push("/login");
+            router.push("/login"); 
           }
         } catch (err) {
           toast.error("⚠️ Error fetching user", { transition: Bounce });
         }
       } else {
+                    localStorage.removeItem("token");
+        toast.error("🔒 Please login first", { transition: Bounce });
         router.push("/login");
       }
     };
