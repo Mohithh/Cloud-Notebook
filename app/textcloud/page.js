@@ -15,6 +15,7 @@ const Page = () => {
   const [editingId, setEditingId] = useState(null);
   const [showEdit, setShowEdit] = useState(false);
   const [editData, setEditData] = useState({ subject: "", tag: "", message: "" });
+  const [isCreating, setIsCreating] = useState(false); // New state for create note loading
 
   const deleteinfo = async (id, email) => {
     const res = await fetch("/api/deletetextcloud", {
@@ -65,24 +66,32 @@ const Page = () => {
       body: JSON.stringify({ email: useremail }),
     });
     const data = await res.json();
-    if (res.ok) setAlldata(data.data);
+    if (res.ok) {
+      setAlldata(data.data);
+      setLoading(false);
+    }
   }, [useremail]);
 
   const submitform = async (e) => {
     e.preventDefault();
-    const res = await fetch("/api/textcloud", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ subject, tag, message, email: useremail }),
-    });
-    if (res.ok) {
-      toast.success("✅ Note added", { transition: Bounce });
-      refresh();
-      setSubject("");
-      setTag("");
-      setMessage("");
-    } else {
-      toast.error("❌ Failed to save", { transition: Bounce });
+    setIsCreating(true); // Start loading
+    try {
+      const res = await fetch("/api/textcloud", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subject, tag, message, email: useremail }),
+      });
+      if (res.ok) {
+        toast.success("✅ Note added", { transition: Bounce });
+        refresh();
+        setSubject("");
+        setTag("");
+        setMessage("");
+      } else {
+        toast.error("❌ Failed to save", { transition: Bounce });
+      }
+    } finally {
+      setIsCreating(false); // Stop loading regardless of outcome
     }
   };
 
@@ -116,17 +125,18 @@ const Page = () => {
           const notes = await allRes.json();
           if (allRes.ok) {
             setAlldata(notes.data);
-            setLoading(false);
           }
         } else {
           toast.error("🔒 Please login again", { transition: Bounce });
         }
       } catch (err) {
         toast.error("⚠️ Error fetching user", { transition: Bounce });
+      } finally {
+        setLoading(false); // Ensure loading is set to false in all cases
       }
     };
     checkuser();
-  }, [router]); // Added router to dependency array
+  }, [router]);
 
   return (
     <div className="min-h-screen bg-white text-gray-800">
@@ -206,9 +216,20 @@ const Page = () => {
             </div>
             <button
               type="submit"
-              className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+              disabled={isCreating}
+              className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors flex justify-center items-center"
             >
-              Create Note
+              {isCreating ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Creating...
+                </>
+              ) : (
+                "Create Note"
+              )}
             </button>
           </form>
         </div>
@@ -307,7 +328,7 @@ const Page = () => {
                   </div>
                 </div>
                 <div className="mt-6 flex justify-end space-x-3">
-                  <button
+                  <button 
                     onClick={() => setShowEdit(false)}
                     className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   >
