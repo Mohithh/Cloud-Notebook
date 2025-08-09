@@ -303,8 +303,9 @@ const text = `🔐 Your verification code is: ${otp}\nThis OTP is valid for 10 m
         
       </div>
 
-      <ToastContainer />
+     
     </div>}
+     <ToastContainer />
 
 
     </div>

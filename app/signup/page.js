@@ -123,6 +123,9 @@ const text = `🔐 Your verification code is: ${otp}\nThis OTP is valid for 10 m
           // console.log("userotp",userotp)
           e.preventDefault();
           // console.log("submitotp")
+
+          console.log("userotp", userotp)
+          console.log("cotp", cotp)
           
           if (userotp ==cotp) {
     
@@ -141,6 +144,7 @@ const text = `🔐 Your verification code is: ${otp}\nThis OTP is valid for 10 m
               theme: "light",
             });
           } else {
+            console.log("otp not matched")
             toast.error("Invalid OTP", {
               position: "top-center",
               autoClose: 3000,
@@ -298,7 +302,7 @@ const text = `🔐 Your verification code is: ${otp}\nThis OTP is valid for 10 m
           </div>
         </div>
 
-        {/* Right Side - Illustration */}
+        {/* Right Side - Illustration */} 
 
         <div>
           <Image
@@ -312,8 +316,10 @@ const text = `🔐 Your verification code is: ${otp}\nThis OTP is valid for 10 m
        
       </div>
 
-      <ToastContainer />
+      
     </div>}
+          <ToastContainer />
+
 
 
     </div>
