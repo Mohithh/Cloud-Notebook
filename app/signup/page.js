@@ -119,14 +119,14 @@ const text = `🔐 Your verification code is: ${otp}\nThis OTP is valid for 10 m
     }
      const submitotp = async (e) => {
     
-          console.log("cotp",cotp)
-          console.log("userotp",userotp)
+          // console.log("cotp",cotp)
+          // console.log("userotp",userotp)
           e.preventDefault();
-          console.log("submitotp")
+          // console.log("submitotp")
           
           if (userotp ==cotp) {
     
-            console.log("otp matched")
+            // console.log("otp matched")
             setfirst(false)
             setsecond(true)
             setotpbox(false)
@@ -299,6 +299,16 @@ const text = `🔐 Your verification code is: ${otp}\nThis OTP is valid for 10 m
         </div>
 
         {/* Right Side - Illustration */}
+
+        <div>
+          <Image
+            src="/Signup.png"
+            alt="Sign Up Illustration"
+            width={500}
+            height={500}
+            className="hidden md:block w-full h-auto object-cover"
+          />
+        </div>
        
       </div>
 

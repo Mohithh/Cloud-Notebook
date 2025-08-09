@@ -44,7 +44,7 @@ export default function SignUpPage() {
 
       
       const res = await response.json();
-        console.log("res", res)
+        // console.log("res", res)
     if (res.success) {
   toast.success("Password updated successfully!", {
     position: "top-center",
@@ -72,7 +72,7 @@ export default function SignUpPage() {
         });
       }
     } catch (error) {
-        console.error("Error:", error);
+        // console.error("Error:", error);
       toast.error("Something went wrong!", {
         position: "top-center",
         autoClose: 3000,
@@ -121,14 +121,14 @@ const text = `🔐 Your verification code is: ${otp}\nThis OTP is valid for 10 m
     }
      const submitotp = async (e) => {
     
-          console.log("cotp",cotp)
-          console.log("userotp",userotp)
+          // console.log("cotp",cotp)
+          // console.log("userotp",userotp)
           e.preventDefault();
-          console.log("submitotp")
+          // console.log("submitotp")
           
           if (userotp ==cotp) {
     
-            console.log("otp matched")
+            // console.log("otp matched")
             setfirst(false)
             setsecond(true)
             setotpbox(false)
@@ -291,6 +291,15 @@ const text = `🔐 Your verification code is: ${otp}\nThis OTP is valid for 10 m
         </div>
 
         {/* Right Side - Illustration */}
+        <div>
+          <Image
+            src="/forgot.jpg"
+            alt="Sign Up Illustration"
+            width={500}
+            height={500}
+            className="hidden md:block w-full h-auto object-cover"
+          />
+        </div>
         
       </div>
 
