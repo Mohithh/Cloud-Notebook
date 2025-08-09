@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📂 TextCloud
 
-## Getting Started
+**Your secure, all-in-one storage solution for text and images.**  
+TextCloud allows you to store, organize, and access your text notes and images from anywhere, with robust security and a simple interface.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Getting Started
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1️⃣ Login or Create Account
+- Create your account with OTP verification for secure access.
+- Already have an account? Simply log in.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+➡ **[Go to Login](#)**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2️⃣ Add Your Content
+- Add **text notes** or upload **images** through an easy-to-use interface.
 
-## Learn More
+### 3️⃣ Access Anytime
+- Your content is securely stored in the cloud and can be accessed from any device with your login credentials.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✨ Key Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 🔐 **Secure Login** – OTP verification ensures only you can access your account.  
+- ✏️ **Add Text Notes** – Save and organize your ideas, thoughts, and important info.  
+- 🖼️ **Upload Images** – Store your favorite images and access them anytime.  
+- 📱 **Responsive Design** – Works perfectly on mobile, tablet, and desktop.  
+- 🔄 **Real-time Sync** – Your data syncs instantly across devices.  
+- 🔍 **Easy Search** – Quickly find what you need using the powerful search feature.  
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ❓ Frequently Asked Questions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Q: How do I reset my password?**  
+A: Request an OTP on the login page and follow the verification process to set a new password.
+
+**Q: Is there a storage limit?**  
+A: Free accounts have **1GB** storage. Premium plans with more storage are coming soon!
+
+**Q: Can I share my content?**  
+A: Currently, all content is private. Sharing features are planned for future updates.
+
+---
+
+## 📦 Tech Stack (Example)
+- **Frontend:** Next.js / React.js  
+- **Backend:** Node.js / Express  
+- **Database:** MongoDB  
+- **Authentication:** OTP-based login system  
+- **Hosting:** Vercel  
+
+---
+
+
+
+**Made with ❤️ for secure and simple cloud storage.**
