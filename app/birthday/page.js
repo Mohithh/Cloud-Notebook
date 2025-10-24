@@ -405,7 +405,7 @@ const UltimateBirthdaySurprise = () => {
         )}
 
         {/* Step 3: Final Surprise with Next.js Image */}
-       {currentStep === 3 && (
+      {currentStep === 3 && (
   <div className="text-center space-y-8 animate-fade-in-up w-full max-w-4xl">
     <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20">
       <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-bounce bg-gradient-to-r from-yellow-300 via-pink-300 to-red-300 bg-clip-text text-transparent">
@@ -425,6 +425,70 @@ const UltimateBirthdaySurprise = () => {
 
       {/* Birthday Wishes */}
       <div className="text-white mb-8 space-y-6">
+        {/* NEW LINES ADDED HERE */}
+        <p className="text-xl md:text-2xl leading-relaxed font-medium text-yellow-300">
+          Unplanned love, Unexpected bond<br />
+          Right time, Right person<br />
+          That&apos;s youuuuuuu
+        </p>
+        
+        <p className="text-lg md:text-xl leading-relaxed font-semibold">
+          Carrying happiness on youu ❤ Happy Birthday to the amazing, wonderful and beautiful you! 🎂✨
+        </p>
+        
+        <p className="text-xl md:text-2xl leading-relaxed font-medium">
+          May this year be your best one yet! 💖
+        </p>
+
+        <div className="h-4"></div>
+
+        <p className="text-lg md:text-xl leading-relaxed">
+          Wishing you a day filled with happiness, laughter, and endless surprises!
+        </p>
+        
+        <p className="text-xl md:text-2xl font-semibold text-yellow-300">
+          Aaj ka din sirf aur sirf tumhara hai — so smile wide, laugh loud, and enjoy every single moment like a queen 👑
+        </p>
+
+        <p className="text-lg md:text-xl leading-relaxed">
+          You&apos;re truly one of a kind — ek aisi insaan jinki vibes pure positive hain aur jinki presence sabke life mein khushiyan bhar deti hai 💫
+        </p>
+        
+        <p className="text-xl md:text-2xl leading-relaxed font-medium">
+          May your every dream come true, and may success follow you wherever you go 🌈
+        </p>
+
+        <div className="h-4"></div>
+
+        <p className="text-lg md:text-xl leading-relaxed italic">
+          Kabhi life mein tension aaye toh yaad rakhna — tum bohot strong ho:
+        </p>
+        
+        <p className="text-lg md:text-xl leading-relaxed italic">
+          Aur tumhara dil jitna beautiful hai, utni hi khoobsurat tumhari journey bhi rahe;
+        </p>
+
+        <p className="text-lg md:text-xl leading-relaxed">
+          May this year bring you new adventures, genuine people, and countless reasons to smile.
+        </p>
+        
+        <p className="text-xl md:text-2xl font-semibold">
+          Har subah naye sapne laaye, har shaam sukoon bhari ho ☀️🌙
+        </p>
+
+        <div className="h-4"></div>
+
+        <p className="text-xl md:text-2xl leading-relaxed font-medium">
+          So here&apos;s to more laughter, more love, and more magic in your life ✨
+        </p>
+        
+        <p className="text-xl md:text-2xl font-semibold text-yellow-300">
+          Enjoy your day to the fullest — because you truly deserve all the happiness in the world! 🧿
+        </p>
+
+        <div className="h-6"></div>
+
+        {/* ORIGINAL WISHES CONTINUE */}
         <p className="text-xl md:text-2xl leading-relaxed font-medium">
           On this special day, I just want to wish you a life filled with endless smiles, pure happiness, and dreams that turn into reality.
         </p>
