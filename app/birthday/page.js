@@ -42,6 +42,25 @@ const UltimateBirthdaySurprise = () => {
     'img4.jpg',
     'img5.jpg', 
     'img6.jpg',
+
+    'img8.jpg',
+    'img9.jpg',
+    'img10.jpg',
+    'img11.jpg',
+    'img12.jpg', 
+    'img13.jpg',
+    'img14.jpg',
+    'img15.jpg',
+    'img16.jpg',
+    'img17.jpg',
+    'img18.jpg', 
+    'img19.jpg',
+    'img20.jpg',
+    'img21.jpg',
+    'img22.jpg',
+    'img23.jpg',
+    'img24.jpg', 
+    'img6.jpg',
   ];
 
   const steps = [
@@ -59,7 +78,7 @@ const UltimateBirthdaySurprise = () => {
       buttonText: "Continue to Countdown →",
       background: "from-emerald-600 via-cyan-500 to-blue-600", 
       emoji: "📷",
-      music: "happy-birthday-401919.mp3"
+      music: "happy-birthday-254480.mp3"
     },
     {
       title: "Countdown Begins! ⏰",
@@ -75,7 +94,7 @@ const UltimateBirthdaySurprise = () => {
       buttonText: "Celebrate Again! 🔄",
       background: "from-yellow-500 via-orange-500 to-red-500",
       emoji: "🎂",
-      music: "happy-birthday-254480.mp3"
+      music: "WhatsApp Audio 2025-10-24 at 21.29.27_789c5f74.mp3"
     }
   ];
 
@@ -354,61 +373,124 @@ const UltimateBirthdaySurprise = () => {
         )}
 
         {/* Step 3: Final Surprise */}
-        {currentStep === 3 && (
-          <div className="text-center space-y-8 animate-fade-in-up w-full max-w-4xl">
-            <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20">
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-bounce bg-gradient-to-r from-yellow-300 via-pink-300 to-red-300 bg-clip-text text-transparent">
-                HAPPY BIRTHDAY Shivangi ! 🎂
-              </h1>
-              
-              {/* Main Photo Display - Direct img tag */}
-              <div className="w-48 h-48 md:w-64 md:h-64 mx-auto mb-8 rounded-full border-4 border-yellow-400 shadow-2xl overflow-hidden">
-                <img 
-                  src="img1.jpg" 
-                  alt="Shivangi  Birthday" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
+       {currentStep === 3 && (
+  <div className="text-center space-y-8 animate-fade-in-up w-full max-w-4xl">
+    <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20">
+      <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-bounce bg-gradient-to-r from-yellow-300 via-pink-300 to-red-300 bg-clip-text text-transparent">
+        HAPPY BIRTHDAY Shivangi! 🎂
+      </h1>
+      
+      {/* Main Photo Display */}
+      <div className="w-48 h-48 md:w-64 md:h-64 mx-auto mb-8 rounded-full border-4 border-yellow-400 shadow-2xl overflow-hidden">
+        <img 
+          src="img1.jpg" 
+          alt="Shivangi Birthday" 
+          className="w-full h-full object-cover"
+        />
+      </div>
 
-              <p className="text-2xl md:text-3xl text-white mb-6 font-semibold">
-                Wishing you endless joy and amazing adventures Shivangi ! 🥳
-              </p>
+      {/* Birthday Wishes */}
+      <div className="text-white mb-8 space-y-6">
+        <p className="text-xl md:text-2xl leading-relaxed font-medium">
+          On this special day, I just want to wish you a life filled with endless smiles, pure happiness, and dreams that turn into reality.
+        </p>
+        
+        <p className="text-lg md:text-xl leading-relaxed">
+          You're one of those rare people whose heart shines brighter than any star — kind, genuine, and full of life. 🌸
+        </p>
 
-              {/* Feature Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-12">
-                {[
-                  { icon: '🎁', title: 'Amazing Gifts', desc: 'You deserve the best Shivangi !' },
-                  { icon: '🎂', title: 'Sweet Treats', desc: 'Time to celebrate!' },
-                  { icon: '⭐', title: 'Unforgettable Memories', desc: 'More to come Shivangi !' }
-                ].map((item, index) => (
-                  <div 
-                    key={index}
-                    className="bg-white/20 rounded-2xl p-6 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 border border-white/30"
-                  >
-                    <div className="text-4xl mb-3 animate-bounce-slow">{item.icon}</div>
-                    <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
-                    <p className="text-white/80 text-sm">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
+        <p className="text-xl md:text-2xl leading-relaxed font-medium">
+          Today is your day — so smile a little extra, laugh a little louder, and eat all the cake you want 🍰 because birthdays are made to celebrate you!
+        </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-                <button
-                  onClick={restartJourney}
-                  className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transform transition-all duration-300 shadow-lg border-2 border-yellow-300/50"
-                >
-                  {steps[3].buttonText}
-                </button>
-                <button
-                  onClick={() => setCurrentStep(1)}
-                  className="bg-white/20 text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transform transition-all duration-300 shadow-lg border border-white/30"
-                >
-                  View Memories Again 📸
-                </button>
-              </div>
-            </div>
+        <div className="h-4"></div> {/* Spacing */}
+
+        <p className="text-lg md:text-xl leading-relaxed">
+          May every morning bring you new hope ☀️,<br />
+          every evening bring you peace 🌙,<br />
+          and may your life always be surrounded by love, light, and success.
+        </p>
+        
+        <p className="text-xl md:text-2xl font-semibold">
+          Never let the world dim your sparkle, because you were born to shine. ✨
+        </p>
+
+        <div className="h-6"></div> {/* Extra spacing */}
+
+        <p className="text-xl md:text-2xl leading-relaxed font-medium">
+          Today is not just another day — it's the day when a truly special person came into this world ❤️
+        </p>
+        
+        <p className="text-xl md:text-2xl font-semibold text-yellow-300">
+          Aaj ka din tumhare naam, tumhari muskaan aur tumhari khushiyon ke naam! 💫
+        </p>
+
+        <p className="text-lg md:text-xl leading-relaxed">
+          You are not just a name, Shivangi — you are a whole vibe, a bundle of positivity, and a reason for so many smiles around you.
+        </p>
+        
+        <p className="text-lg md:text-xl leading-relaxed italic">
+          Tere jaise log life mein ek baar milte hain — jinke saath har pal meetha lagta hai, aur har baat dil se nikalti hai 💖
+        </p>
+
+        <div className="h-6"></div> {/* Extra spacing */}
+
+        <div className="bg-yellow-400/20 rounded-2xl p-6 border border-yellow-300/30">
+          <h3 className="text-2xl md:text-3xl font-bold text-yellow-300 mb-4">
+            So, on your special day, here's a little prayer:
+          </h3>
+          <div className="space-y-3 text-lg md:text-xl">
+            <p className="flex items-center justify-center gap-2">
+              <span className="text-2xl">••</span>
+              May you rise higher than you've ever dreamed.
+            </p>
+            <p className="flex items-center justify-center gap-2">
+              <span className="text-2xl">•</span>
+              May your heart never lose its innocence.
+            </p>
+            <p className="flex items-center justify-center gap-2">
+              <span className="text-2xl">•</span>
+              And may your smile always stay as bright as today.
+            </p>
           </div>
-        )}
+        </div>
+      </div>
+
+      {/* Feature Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-12">
+        {[
+          { icon: '🎁', title: 'Amazing Gifts', desc: 'You deserve the best Shivangi!' },
+          { icon: '🎂', title: 'Sweet Treats', desc: 'Time to celebrate!' },
+          { icon: '⭐', title: 'Unforgettable Memories', desc: 'More to come Shivangi!' }
+        ].map((item, index) => (
+          <div 
+            key={index}
+            className="bg-white/20 rounded-2xl p-6 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 border border-white/30"
+          >
+            <div className="text-4xl mb-3 animate-bounce-slow">{item.icon}</div>
+            <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
+            <p className="text-white/80 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+        <button
+          onClick={restartJourney}
+          className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transform transition-all duration-300 shadow-lg border-2 border-yellow-300/50"
+        >
+          {steps[3].buttonText}
+        </button>
+        <button
+          onClick={() => setCurrentStep(1)}
+          className="bg-white/20 text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transform transition-all duration-300 shadow-lg border border-white/30"
+        >
+          View Memories Again 📸
+        </button>
+      </div>
+    </div>
+  </div>
+)}
       </div>
     </div>
   );
