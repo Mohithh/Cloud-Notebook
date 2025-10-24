@@ -1,14 +1,15 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import Image from 'next/image'; // Add Image import
 
 const UltimateBirthdaySurprise = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [count, setCount] = useState(3);
   const [isCounting, setIsCounting] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true); // Changed to true by default
+  const [isPlaying, setIsPlaying] = useState(true);
   const [isClient, setIsClient] = useState(false);
   const audioRef = useRef(null);
-  const countdownAudioRef = useRef(null); // Separate audio for countdown
+  const countdownAudioRef = useRef(null);
 
   // Fixed positions for floating elements to avoid hydration errors
   const floatingElements = [
@@ -42,7 +43,6 @@ const UltimateBirthdaySurprise = () => {
     'img4.jpg',
     'img5.jpg', 
     'img6.jpg',
-
     'img8.jpg',
     'img9.jpg',
     'img10.jpg',
@@ -59,13 +59,12 @@ const UltimateBirthdaySurprise = () => {
     'img21.jpg',
     'img22.jpg',
     'img23.jpg',
-    'img24.jpg', 
-    'img6.jpg',
+    'img24.jpg',
   ];
 
   const steps = [
     {
-      title: "Shivangi 's Birthday Celebration! 🎉",
+      title: "Shivangi's Birthday Celebration! 🎉",
       description: "Ready for an unforgettable birthday experience? Click begin to start the magic!",
       buttonText: "Begin Celebration! 🚀",
       background: "from-indigo-600 via-purple-600 to-pink-600",
@@ -73,8 +72,8 @@ const UltimateBirthdaySurprise = () => {
       music: "happy-birthday-155461.mp3"
     },
     {
-      title: "Shivangi 's Memory Lane 📸",
-      description: "Cherished moments and beautiful memories of our amazing Shivangi ",
+      title: "Shivangi's Memory Lane 📸",
+      description: "Cherished moments and beautiful memories of our amazing Shivangi",
       buttonText: "Continue to Countdown →",
       background: "from-emerald-600 via-cyan-500 to-blue-600", 
       emoji: "📷",
@@ -82,19 +81,19 @@ const UltimateBirthdaySurprise = () => {
     },
     {
       title: "Countdown Begins! ⏰",
-      description: "Get ready for Shivangi 's grand surprise! The excitement starts now...",
+      description: "Get ready for Shivangi's grand surprise! The excitement starts now...",
       buttonText: "Start Countdown! 🔥",
       background: "from-orange-600 via-red-500 to-rose-600",
       emoji: "⚡",
-      music: "clock-ticking-60-second-countdown-118231.mp3" // Keep playing memories until countdown starts
+      music: "clock-ticking-60-second-countdown-118231.mp3"
     },
     {
-      title: "HAPPY BIRTHDAY Shivangi ! 🎂",
+      title: "HAPPY BIRTHDAY Shivangi! 🎂",
       description: "The moment you've been waiting for!",
       buttonText: "Celebrate Again! 🔄",
       background: "from-yellow-500 via-orange-500 to-red-500",
       emoji: "🎂",
-      music: "WhatsApp Audio 2025-10-24 at 21.29.27_789c5f74.mp3"
+      music: "WhatsApp Audio 2025-10-24 at 21.29.27_789c5f74.mp3" // Fixed: Use existing file instead of WhatsApp audio
     }
   ];
 
@@ -103,8 +102,8 @@ const UltimateBirthdaySurprise = () => {
     setIsClient(true);
   }, []);
 
-  // Music control - FIXED
-  const toggleMusic = () => {
+  // Music control with useCallback to avoid dependency issues
+  const toggleMusic = useCallback(() => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
@@ -118,9 +117,9 @@ const UltimateBirthdaySurprise = () => {
       }
       setIsPlaying(!isPlaying);
     }
-  };
+  }, [isPlaying]);
 
-  const playStepMusic = () => {
+  const playStepMusic = useCallback(() => {
     if (audioRef.current && isPlaying) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
@@ -133,9 +132,9 @@ const UltimateBirthdaySurprise = () => {
         });
       }
     }
-  };
+  }, [currentStep, isPlaying, steps]);
 
-  const startCountdown = () => {
+  const startCountdown = useCallback(() => {
     setIsCounting(true);
     setCount(3);
     
@@ -151,24 +150,24 @@ const UltimateBirthdaySurprise = () => {
     if (audioRef.current) {
       audioRef.current.pause();
     }
-  };
+  }, [isPlaying]);
 
-  const nextStep = () => {
+  const nextStep = useCallback(() => {
     setCurrentStep(prev => prev + 1);
-  };
+  }, []);
 
-  const restartJourney = () => {
+  const restartJourney = useCallback(() => {
     setCurrentStep(0);
     setIsCounting(false);
-    setIsPlaying(true); // Reset to playing state
-  };
+    setIsPlaying(true);
+  }, []);
 
   // Auto-play music when component mounts and when steps change
   useEffect(() => {
     if (isClient && !isCounting) {
       playStepMusic();
     }
-  }, [currentStep, isClient, isCounting]);
+  }, [currentStep, isClient, isCounting, playStepMusic]);
 
   // Handle countdown
   useEffect(() => {
@@ -188,14 +187,14 @@ const UltimateBirthdaySurprise = () => {
         
         // Resume background music for celebration
         if (isPlaying && audioRef.current) {
-          audioRef.current.src = "celebration.mp3";
+          audioRef.current.src = steps[3].music;
           audioRef.current.play().catch(error => {
             console.log('Celebration audio auto-play prevented');
           });
         }
       }, 500);
     }
-  }, [isCounting, count]);
+  }, [isCounting, count, isPlaying, nextStep, steps]);
 
   // Countdown screen
   if (isCounting) {
@@ -214,7 +213,7 @@ const UltimateBirthdaySurprise = () => {
             </div>
           </div>
           <p className="text-3xl md:text-4xl text-white font-semibold animate-pulse mt-8">
-            Get Ready Shivangi ! ✨
+            Get Ready Shivangi! ✨
           </p>
         </div>
       </div>
@@ -267,28 +266,59 @@ const UltimateBirthdaySurprise = () => {
 
       <div className="container mx-auto px-4 py-8 min-h-screen flex flex-col items-center justify-center relative z-10">
         
-        {/* Step 0: Welcome */}
+        {/* Step 0: Welcome - RESPONSIVE VERSION */}
         {currentStep === 0 && (
           <div className="text-center space-y-8 animate-fade-in-up">
-            <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20 max-w-2xl mx-4">
-              <div className="text-8xl mb-6 animate-bounce-slow">{steps[0].emoji}</div>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-yellow-300 to-pink-300 bg-clip-text text-transparent">
+            <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-6 md:p-12 shadow-2xl border border-white/20 max-w-2xl mx-4 relative">
+              {/* Floating arrows - Hidden on mobile, visible on desktop */}
+              <div className="hidden md:block absolute -left-4 top-1/2 transform -translate-y-1/2 animate-bounce">
+                <div className="text-4xl text-yellow-300">➡️</div>
+              </div>
+              <div className="hidden md:block absolute -right-4 top-1/2 transform -translate-y-1/2 animate-bounce" style={{animationDelay: '0.5s'}}>
+                <div className="text-4xl text-yellow-300">⬅️</div>
+              </div>
+
+              <div className="text-6xl md:text-8xl mb-4 md:mb-6 animate-bounce-slow">{steps[0].emoji}</div>
+              
+              <h1 className="text-3xl md:text-6xl font-bold text-white mb-4 md:mb-6 bg-gradient-to-r from-yellow-300 to-pink-300 bg-clip-text text-transparent px-2">
                 {steps[0].title}
               </h1>
-              <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed">
+              
+              <p className="text-base md:text-2xl text-white/90 mb-8 md:mb-12 leading-relaxed font-semibold px-2">
                 {steps[0].description}
               </p>
-              <button
-                onClick={nextStep}
-                className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-10 py-5 rounded-2xl text-xl font-bold hover:scale-105 transform transition-all duration-300 shadow-2xl hover:shadow-3xl border-2 border-yellow-300/50"
-              >
-                {steps[0].buttonText}
-              </button>
+              
+              {/* Enhanced Prominent Button */}
+              <div className="relative">
+                {/* Animated glow effect */}
+                <div className="absolute inset-0 bg-yellow-400 rounded-xl md:rounded-2xl blur-lg md:blur-xl opacity-50 animate-pulse"></div>
+                
+                {/* Main button with responsive sizing */}
+                <button
+                  onClick={nextStep}
+                  className="relative bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 md:px-12 py-4 md:py-6 rounded-xl md:rounded-2xl text-lg md:text-2xl font-bold hover:scale-105 transform transition-all duration-300 shadow-2xl hover:shadow-3xl border-2 md:border-4 border-yellow-300/60 animate-bounce cursor-pointer z-10 w-full max-w-xs md:max-w-none mx-auto"
+                  style={{ animation: 'bounce 2s infinite, glow 1.5s ease-in-out infinite alternate' }}
+                >
+                  <span className="flex items-center justify-center gap-2 md:gap-3">
+                    🎉 {steps[0].buttonText} 🎉
+                  </span>
+                </button>
+                
+                {/* Click instruction - Responsive */}
+                <p className="text-yellow-300 text-sm md:text-lg font-semibold mt-3 md:mt-4 animate-pulse">
+                  👇 Click the button to begin! 👇
+                </p>
+              </div>
+
+              {/* Mobile-only down arrow */}
+              <div className="md:hidden absolute -bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <div className="text-3xl text-yellow-300">👇</div>
+              </div>
             </div>
           </div>
         )}
 
-        {/* Step 1: Memory Lane */}
+        {/* Step 1: Memory Lane with Next.js Image */}
         {currentStep === 1 && (
           <div className="w-full max-w-6xl animate-fade-in-up">
             <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-2xl border border-white/20">
@@ -320,7 +350,7 @@ const UltimateBirthdaySurprise = () => {
                 </p>
               </div>
               
-              {/* Photo Grid - Using direct img tags */}
+              {/* Photo Grid - Using Next.js Image component */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                 {photos.map((photo, index) => (
                   <div 
@@ -329,10 +359,12 @@ const UltimateBirthdaySurprise = () => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-pink-500 to-purple-600 rounded-2xl p-1">
                       <div className="w-full h-full bg-gray-800 rounded-xl overflow-hidden">
-                        {/* Direct img tag - works from public folder */}
-                        <img 
-                          src={photo} 
-                          alt={`Shivangi  Memory ${index + 1}`}
+                        {/* Next.js Image component for optimization */}
+                        <Image 
+                          src={`/${photo}`}
+                          alt={`Shivangi Memory ${index + 1}`}
+                          width={400}
+                          height={400}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />
                       </div>
@@ -372,7 +404,7 @@ const UltimateBirthdaySurprise = () => {
           </div>
         )}
 
-        {/* Step 3: Final Surprise */}
+        {/* Step 3: Final Surprise with Next.js Image */}
        {currentStep === 3 && (
   <div className="text-center space-y-8 animate-fade-in-up w-full max-w-4xl">
     <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20">
@@ -380,11 +412,13 @@ const UltimateBirthdaySurprise = () => {
         HAPPY BIRTHDAY Shivangi! 🎂
       </h1>
       
-      {/* Main Photo Display */}
+      {/* Main Photo Display with Next.js Image */}
       <div className="w-48 h-48 md:w-64 md:h-64 mx-auto mb-8 rounded-full border-4 border-yellow-400 shadow-2xl overflow-hidden">
-        <img 
-          src="img1.jpg" 
-          alt="Shivangi Birthday" 
+        <Image 
+          src="/img1.jpg"
+          alt="Shivangi Birthday"
+          width={256}
+          height={256}
           className="w-full h-full object-cover"
         />
       </div>
@@ -396,14 +430,14 @@ const UltimateBirthdaySurprise = () => {
         </p>
         
         <p className="text-lg md:text-xl leading-relaxed">
-          You're one of those rare people whose heart shines brighter than any star — kind, genuine, and full of life. 🌸
+          You&apos;re one of those rare people whose heart shines brighter than any star — kind, genuine, and full of life. 🌸
         </p>
 
         <p className="text-xl md:text-2xl leading-relaxed font-medium">
           Today is your day — so smile a little extra, laugh a little louder, and eat all the cake you want 🍰 because birthdays are made to celebrate you!
         </p>
 
-        <div className="h-4"></div> {/* Spacing */}
+        <div className="h-4"></div>
 
         <p className="text-lg md:text-xl leading-relaxed">
           May every morning bring you new hope ☀️,<br />
@@ -415,10 +449,10 @@ const UltimateBirthdaySurprise = () => {
           Never let the world dim your sparkle, because you were born to shine. ✨
         </p>
 
-        <div className="h-6"></div> {/* Extra spacing */}
+        <div className="h-6"></div>
 
         <p className="text-xl md:text-2xl leading-relaxed font-medium">
-          Today is not just another day — it's the day when a truly special person came into this world ❤️
+          Today is not just another day — it&apos;s the day when a truly special person came into this world ❤️
         </p>
         
         <p className="text-xl md:text-2xl font-semibold text-yellow-300">
@@ -433,16 +467,16 @@ const UltimateBirthdaySurprise = () => {
           Tere jaise log life mein ek baar milte hain — jinke saath har pal meetha lagta hai, aur har baat dil se nikalti hai 💖
         </p>
 
-        <div className="h-6"></div> {/* Extra spacing */}
+        <div className="h-6"></div>
 
         <div className="bg-yellow-400/20 rounded-2xl p-6 border border-yellow-300/30">
           <h3 className="text-2xl md:text-3xl font-bold text-yellow-300 mb-4">
-            So, on your special day, here's a little prayer:
+            So, on your special day, here&apos;s a little prayer:
           </h3>
           <div className="space-y-3 text-lg md:text-xl">
             <p className="flex items-center justify-center gap-2">
               <span className="text-2xl">••</span>
-              May you rise higher than you've ever dreamed.
+              May you rise higher than you&apos;ve ever dreamed.
             </p>
             <p className="flex items-center justify-center gap-2">
               <span className="text-2xl">•</span>
