@@ -319,69 +319,107 @@ const UltimateBirthdaySurprise = () => {
         )}
 
         {/* Step 1: Memory Lane with Next.js Image */}
-        {currentStep === 1 && (
-          <div className="w-full max-w-6xl animate-fade-in-up">
-            <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-2xl border border-white/20">
-              
-              {/* TOP NAVIGATION */}
-              <div className="flex justify-between items-center mb-8">
-                <button
-                  onClick={() => setCurrentStep(0)}
-                  className="bg-white/20 text-white px-6 py-3 rounded-xl font-semibold hover:scale-105 transform transition-all duration-300 border border-white/30 flex items-center gap-2"
-                >
-                  ← Back
-                </button>
-                
-                <button
-                  onClick={nextStep}
-                  className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transform transition-all duration-300 shadow-xl flex items-center gap-2"
-                >
-                  {steps[1].buttonText}
-                </button>
-              </div>
+       {currentStep === 1 && (
+  <div className="w-full max-w-6xl animate-fade-in-up">
+    <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-2xl border border-white/20">
+      
+      {/* TOP NAVIGATION - IMPROVED */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+        <button
+          onClick={() => setCurrentStep(0)}
+          className="bg-white/20 text-white px-4 sm:px-6 py-3 rounded-xl font-semibold hover:scale-105 transform transition-all duration-300 border border-white/30 flex items-center gap-2 w-full sm:w-auto justify-center"
+        >
+          ← Back
+        </button>
+        
+        {/* ENHANCED CONTINUE BUTTON */}
+        <div className="relative w-full sm:w-auto">
+          {/* Glow effect */}
+          <div className="absolute inset-0 bg-cyan-400 rounded-xl blur-lg opacity-60 animate-pulse"></div>
+          
+          {/* Main button */}
+          <button
+            onClick={nextStep}
+            className="relative bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 sm:px-8 py-4 rounded-xl text-lg font-bold hover:scale-105 transform transition-all duration-300 shadow-2xl hover:shadow-3xl border-2 border-cyan-300/60 animate-bounce cursor-pointer z-10 w-full"
+            style={{ animation: 'bounce 2s infinite, glow 1.5s ease-in-out infinite alternate' }}
+          >
+            <span className="flex items-center justify-center gap-2 sm:gap-3">
+              ⚡ {steps[1].buttonText} ⚡
+            </span>
+          </button>
+          
+          {/* Click instruction */}
+          <p className="text-cyan-300 text-sm font-semibold mt-2 text-center animate-pulse">
+            👆 Click to continue! 👆
+          </p>
+        </div>
+      </div>
 
-              {/* Header */}
-              <div className="text-center mb-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">
-                  {steps[1].title}
-                </h2>
-                <p className="text-xl text-white/80">
-                  {steps[1].description}
-                </p>
+      {/* Header */}
+      <div className="text-center mb-8">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">
+          {steps[1].title}
+        </h2>
+        <p className="text-xl text-white/80">
+          {steps[1].description}
+        </p>
+      </div>
+      
+      {/* Photo Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        {photos.map((photo, index) => (
+          <div 
+            key={index} 
+            className="group relative aspect-square rounded-2xl overflow-hidden transform hover:scale-105 transition-all duration-500 cursor-pointer"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-pink-500 to-purple-600 rounded-2xl p-1">
+              <div className="w-full h-full bg-gray-800 rounded-xl overflow-hidden">
+                <Image 
+                  src={`/${photo}`}
+                  alt={`Shivangi Memory ${index + 1}`}
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
               </div>
-              
-              {/* Photo Grid - Using Next.js Image component */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                {photos.map((photo, index) => (
-                  <div 
-                    key={index} 
-                    className="group relative aspect-square rounded-2xl overflow-hidden transform hover:scale-105 transition-all duration-500 cursor-pointer"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-pink-500 to-purple-600 rounded-2xl p-1">
-                      <div className="w-full h-full bg-gray-800 rounded-xl overflow-hidden">
-                        {/* Next.js Image component for optimization */}
-                        <Image 
-                          src={`/${photo}`}
-                          alt={`Shivangi Memory ${index + 1}`}
-                          width={400}
-                          height={400}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                      <div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                        <div className="text-2xl mb-1">✨</div>
-                        <div className="text-sm font-semibold">Memory {index + 1}</div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+            </div>
+            
+            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+              <div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <div className="text-2xl mb-1">✨</div>
+                <div className="text-sm font-semibold">Memory {index + 1}</div>
               </div>
             </div>
           </div>
-        )}
+        ))}
+      </div>
+
+      {/* BOTTOM CONTINUE BUTTON FOR MOBILE */}
+      <div className="mt-8 sm:hidden">
+        <div className="relative">
+          {/* Glow effect */}
+          <div className="absolute inset-0 bg-cyan-400 rounded-xl blur-lg opacity-60 animate-pulse"></div>
+          
+          {/* Main button */}
+          <button
+            onClick={nextStep}
+            className="relative bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-4 rounded-xl text-lg font-bold hover:scale-105 transform transition-all duration-300 shadow-2xl hover:shadow-3xl border-2 border-cyan-300/60 animate-bounce cursor-pointer z-10 w-full"
+            style={{ animation: 'bounce 2s infinite, glow 1.5s ease-in-out infinite alternate' }}
+          >
+            <span className="flex items-center justify-center gap-2">
+              ⚡ Continue to Countdown → ⚡
+            </span>
+          </button>
+          
+          {/* Click instruction */}
+          <p className="text-cyan-300 text-sm font-semibold mt-2 text-center animate-pulse">
+            👆 Tap to continue! 👆
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
         {/* Step 2: Countdown Trigger */}
         {currentStep === 2 && (
